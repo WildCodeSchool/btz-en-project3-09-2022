@@ -20,10 +20,11 @@ model User {
   profilePic String
   firstname String
   lastname String
-  team String
+  team String?
+  workLocation String
   birthday DateTime @db.Date
   email String @unique
-  password String
+  hashedPassword String
   files File[]
   posts Post[]
   isDisabled Boolean
@@ -31,15 +32,13 @@ model User {
   categories Category[]
   comments Comment[]
   sites Site[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   site_permissions SitePermission[]
   post_permissions PostPermission[]
   category_permissions CategoryPermission[]
   space_permissions SpacePermission[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
-
-
 
 model SitePermission {
   id String @id @default(uuid())
@@ -70,7 +69,7 @@ model PostPermission {
 }
 
 model CategoryPermission {
-   id String @id @default(uuid())
+  id String @id @default(uuid())
   name Permission @default(READ)
   read Boolean @default(false)
   write Boolean @default(false)
@@ -100,12 +99,12 @@ model SpacePermission {
 model Site {
   id String @id @unique @default(uuid())
   name String @unique
-  createdAt DateTime @default(now())
   user User @relation(fields: [userId], references: [id])
   spaces Space[]
   userId String
-  updatedAt DateTime @updatedAt
   permissions SitePermission[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Space {
@@ -128,15 +127,16 @@ model Category {
   spaceId String
   owner User @relation(fields: [ownerId],references: [id])
   ownerId String
+  permissions CategoryPermission[]
   posts Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  permissions CategoryPermission[]
 }
 
 model Post {
   id String @id @unique @default(uuid())
-  name String @unique
+  title String
+  content String
   category Category @relation(fields: [categoryId], references: [id])
   categoryId String
   author User @relation(fields: [authorId], references: [id])
@@ -168,6 +168,8 @@ model File {
   name String
   url String
   format String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Role {

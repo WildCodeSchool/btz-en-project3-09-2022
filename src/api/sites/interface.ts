@@ -14,4 +14,5 @@ export interface ISiteHandlers {
   getOne: RequestHandler<{ id: string }, Site | ResponseError, null>;
   create: RequestHandler<null, Site | ResponseError, TSiteBodyCreate>;
   update: RequestHandler<{ id: string }, Site | ResponseError, TSiteBodyCreate>;
+  delete: RequestHandler<{ id: string }, Site | ResponseError, null>;
 }

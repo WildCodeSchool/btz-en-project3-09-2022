@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { IUserHandlers } from "../interface";
 import prisma from "../../../../prisma/client";
 

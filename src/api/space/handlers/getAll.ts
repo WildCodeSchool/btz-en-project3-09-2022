@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { SpaceHandlers } from "./../interface";
 import prisma from "../../../../prisma/client";
 

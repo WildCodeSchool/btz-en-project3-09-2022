@@ -1,8 +1,8 @@
-import books from "./books/routes";
 import { Router } from "express";
+import post from "./Post/routes";
 
 const router = Router();
 
-router.use("/books", books);
+router.use("/post", post);
 
 export default router;

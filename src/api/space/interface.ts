@@ -5,10 +5,16 @@ type ResponseError = {
   message: string | unknown;
 };
 
+type SpaceBodyCreate = Omit<Space, "id" | "createdAt" | "updatedAt">;
+
 export interface SpaceHandlers {
   getAll: RequestHandler<null, Space[] | ResponseError, null>;
   getOne: RequestHandler<{ id: string }, Space | ResponseError, null>;
-  //   create: RequestHandler;
+  create: RequestHandler<
+    { id: string },
+    Space | ResponseError,
+    SpaceBodyCreate
+  >;
   //   update: RequestHandler;
   //   delete: RequestHandler;
 }

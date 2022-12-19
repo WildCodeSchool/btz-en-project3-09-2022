@@ -23,4 +23,5 @@ export interface IUserHandlers {
     User | ResponseError,
     TAuthorBodyCreate
   >;
+  delete: RequestHandler<{ id: string }, User | ResponseError, null>;
 }

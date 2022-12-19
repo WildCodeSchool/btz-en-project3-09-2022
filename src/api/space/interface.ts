@@ -21,5 +21,5 @@ export interface SpaceHandlers {
     Space | ResponseError,
     SpaceBodyUpdate
   >;
-  //   delete: RequestHandler;
+  delete: RequestHandler;
 }

@@ -3,6 +3,6 @@ import controller from "./controller";
 
 const router = Router();
 
-router.get("/", controller.getAllBooks);
+router.get("/", controller.getAll);
 
 export default router;

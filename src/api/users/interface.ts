@@ -18,4 +18,9 @@ export interface IUserHandlers {
   getAll: RequestHandler<null, User[] | ResponseError, null>;
   getOne: RequestHandler<{ id: string }, User | ResponseError, null>;
   create: RequestHandler<null, User | ResponseError, TAuthorBodyCreate>;
+  update: RequestHandler<
+    { id: string },
+    User | ResponseError,
+    TAuthorBodyCreate
+  >;
 }

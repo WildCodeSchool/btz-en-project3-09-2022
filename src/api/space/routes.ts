@@ -7,6 +7,6 @@ router.get("/", controller.getAll);
 router.get("/:id", controller.getOne);
 router.post("/:id", controller.create);
 // router.delete("/:id", controller.delete);
-// router.put("/:id", controller.update);
+router.put("/:id", controller.update);
 
 export default router;

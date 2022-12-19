@@ -6,6 +6,7 @@ type ResponseError = {
 };
 
 type SpaceBodyCreate = Omit<Space, "id" | "createdAt" | "updatedAt">;
+type SpaceBodyUpdate = Omit<Space, "id" | "createdAt" | "updatedAt">;
 
 export interface SpaceHandlers {
   getAll: RequestHandler<null, Space[] | ResponseError, null>;
@@ -15,6 +16,10 @@ export interface SpaceHandlers {
     Space | ResponseError,
     SpaceBodyCreate
   >;
-  //   update: RequestHandler;
+  update: RequestHandler<
+    { id: string },
+    Space | ResponseError,
+    SpaceBodyUpdate
+  >;
   //   delete: RequestHandler;
 }

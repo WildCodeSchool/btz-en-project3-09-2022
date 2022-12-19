@@ -15,4 +15,5 @@ import ResponseError from "../ResponseError";
 
 export interface IUserHandlers {
   getAll: RequestHandler<null, User[] | ResponseError, null>;
+  getOne: RequestHandler<{ id: string }, User | ResponseError, null>;
 }

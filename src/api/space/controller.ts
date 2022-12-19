@@ -1,9 +1,10 @@
 import { SpaceHandlers } from "./interface";
 import getAll from "./handlers/getAll";
+import getOne from "./handlers/getOne";
 
 const controller: SpaceHandlers = {
   getAll,
-  //   getOne,
+  getOne,
   //   create,
   //   delete,
   //   update,

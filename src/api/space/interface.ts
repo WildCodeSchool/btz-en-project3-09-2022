@@ -7,7 +7,7 @@ type ResponseError = {
 
 export interface SpaceHandlers {
   getAll: RequestHandler<null, Space[] | ResponseError, null>;
-  //   getOne: RequestHandler;
+  getOne: RequestHandler<{ id: string }, Space | ResponseError, null>;
   //   create: RequestHandler;
   //   update: RequestHandler;
   //   delete: RequestHandler;

@@ -1,8 +1,8 @@
-import books from "./books/routes";
+import spaces from "./space/routes";
 import { Router } from "express";
 
 const router = Router();
 
-router.use("/books", books);
+router.use("/spaces", spaces);
 
 export default router;

@@ -9,4 +9,5 @@ import ResponseError from "../ResponseError";
 
 export interface ISiteHandlers {
   getAll: RequestHandler<null, Site[] | ResponseError, null>;
+  getOne: RequestHandler<{ id: string }, Site | ResponseError, null>;
 }

@@ -10,4 +10,5 @@ import ResponseError from "../ResponseError";
 
 export interface ICommentHandlers {
   getAll: RequestHandler<null, Comment[] | ResponseError, null>;
+  getOne: RequestHandler<{ id: string }, Comment | ResponseError, null>;
 }

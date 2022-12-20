@@ -1,4 +1,4 @@
-import spaces from "./space/routes";
+import spaces from "./spaces/routes";
 import { Router } from "express";
 
 const router = Router();

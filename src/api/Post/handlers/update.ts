@@ -10,12 +10,8 @@ const updatePost: IPostHandler["update"] = async (req, res) => {
         id,
       },
       data: {
-        author: {
-          connect: { id: authorId },
-        },
-        category: {
-          connect: { id: categoryId },
-        },
+        authorId,
+        categoryId,
         content,
         title,
       },

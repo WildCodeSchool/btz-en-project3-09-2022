@@ -1,4 +1,5 @@
 import { Router } from "express";
+import sites from "./sites/routes";
 import users from "./users/routes";
 import teams from "./teams/routes";
 import posts from "./posts/routes";
@@ -16,5 +17,6 @@ router.use("/notifications", notifications);
 router.use("/categories", categories);
 router.use("/images", images);
 router.use("/spaces", spaces);
+router.use("/sites", sites);
 
 export default router;

@@ -17,4 +17,5 @@ export interface ICommentHandlers {
     Comment | ResponseError,
     TCommentBodyCreate
   >;
+  delete: RequestHandler<{ id: string }, Comment | ResponseError, null>;
 }

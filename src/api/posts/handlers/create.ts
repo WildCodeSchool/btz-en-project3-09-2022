@@ -7,14 +7,10 @@ const createPost: IPostHandler["create"] = async (req, res) => {
   try {
     const newPost = await prisma.post.create({
       data: {
-        author: {
-          connect: { id: authorId },
-        },
-        category: {
-          connect: { id: categoryId },
-        },
         content,
         title,
+        authorId,
+        categoryId,
       },
     });
     res.status(200).json(newPost);

@@ -17,7 +17,7 @@ datasource db {
 model User {
   id String @id @unique @default(uuid())
   role Role @default(USER)
-  imageUrl String
+  imageUrl String?
   firstname String
   lastname String
   team Team @relation(fields: [teamId], references: [id])
@@ -25,10 +25,10 @@ model User {
   workLocation String
   birthday DateTime @db.Date
   email String @unique
-  hashedPassword String
+  password String
   images Image[]
   posts Post[]
-  isDisabled Boolean
+  isDisabled Boolean @default(false)
   spaces Space[]
   categories Category[]
   inCategories Category[] @relation("category_members")

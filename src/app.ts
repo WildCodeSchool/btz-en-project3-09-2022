@@ -1,9 +1,26 @@
-import Express from "express";
+import cors from "cors";
+import express from "express";
 import api from "./api";
 
-const app = Express();
+import dotenv from "dotenv";
 
-app.use(Express.json());
+dotenv.config();
+
+const app = express();
+
+app.use(express.json());
+
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    allowedHeaders: ["Authorization", "content-type"],
+  })
+);
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 app.use("/api/v1", api);
 

@@ -7,9 +7,12 @@ import notifications from "./notifications/routes";
 import categories from "./categories/routes";
 import images from "./images/routes";
 import spaces from "./spaces/routes";
+import comments from "./comments/routes";
+import auth from "./auth/routes";
 
 const router = Router();
 
+router.use("/auth", auth);
 router.use("/users", users);
 router.use("/teams", teams);
 router.use("/posts", posts);
@@ -18,5 +21,6 @@ router.use("/categories", categories);
 router.use("/images", images);
 router.use("/spaces", spaces);
 router.use("/sites", sites);
+router.use("/comments", comments);
 
 export default router;

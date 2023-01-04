@@ -9,7 +9,7 @@ type TAuthorBodyCreate = {
   workLocation: string;
   birthday: Date;
   email: string;
-  hashedPassword: string;
+  password: string;
   teamId: string;
   isDisabled: boolean;
 };

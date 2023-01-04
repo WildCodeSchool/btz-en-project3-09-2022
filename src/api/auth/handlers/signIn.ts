@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import argon2 from "argon2";
 import prisma from "../../../../prisma/client";
 import IAuthController from "../interface";
@@ -13,8 +12,6 @@ const signIn: IAuthController["signIn"] = async (req, res, next) => {
         email: email,
       },
     });
-
-    console.log(password, logUser.password);
 
     if (!(await argon2.verify(logUser.password, password))) {
       throw new Error("Invalid password");

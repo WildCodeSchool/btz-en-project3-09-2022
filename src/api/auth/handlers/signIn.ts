@@ -14,8 +14,6 @@ const signIn: IAuthController["signIn"] = async (req, res, next) => {
       },
     });
 
-    console.log(password, logUser.password);
-
     if (!(await argon2.verify(logUser.password, password))) {
       throw new Error("Invalid password");
     }
@@ -25,7 +23,7 @@ const signIn: IAuthController["signIn"] = async (req, res, next) => {
     // password match
     const { password: _, ...userWithoutPassword } = logUser;
     const token = sign({ ...userWithoutPassword }, secret);
-    res.setHeader("Authorization", `Bearer ${token}`);
+    res.setHeader("authorization", `Bearer ${token}`);
 
     return res.status(200).json({
       ...userWithoutPassword,

@@ -2,8 +2,7 @@ import { RequestHandler } from "express";
 import { Category } from "@prisma/client";
 import ResponseError from "../ResponseError";
 
-type CategoryBodyCreate = Omit<Category, "id" | "createdAt" | "updatedAt">;
-type CategoryBodyUpdate = Omit<Category, "id" | "createdAt" | "updatedAt">;
+type TCategoryBody = Omit<Category, "id" | "createdAt" | "updatedAt">;
 
 export interface CategoryHandlers {
   getAll: RequestHandler<null, Category[] | ResponseError, null>;
@@ -11,12 +10,12 @@ export interface CategoryHandlers {
   create: RequestHandler<
     { id: string },
     Category | ResponseError,
-    CategoryBodyCreate
+    TCategoryBody
   >;
   update: RequestHandler<
     { id: string },
     Category | ResponseError,
-    CategoryBodyUpdate
+    TCategoryBody
   >;
   delete: RequestHandler;
 }

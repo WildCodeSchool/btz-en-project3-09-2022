@@ -24,7 +24,9 @@ model User {
   teamId String
   workLocation String
   birthday DateTime @db.Date
+  showBirthday Boolean @default(false)
   email String @unique
+  showEmail Boolean @default(false)
   password String
   images Image[]
   posts Post[]
@@ -115,6 +117,7 @@ model Space {
   id String @id @unique @default(uuid())
   name String @unique
   imageUrl String
+  description String
   site Site @relation(fields: [siteId], references: [id])
   siteId String
   owner User @relation(fields: [ownerId],references: [id])

@@ -6,6 +6,8 @@ export type TUserWithoutPassword = Omit<User, "password">;
 
 type TUserBody = Omit<User, "id" | "createdAt" | "updatedAt">;
 
+type TUserBodyUpdate = Omit<TUserBody, "password">;
+
 export interface IUserHandlers {
   getAll: RequestHandler<null, TUserWithoutPassword[] | ResponseError, null>;
   getOne: RequestHandler<
@@ -17,7 +19,7 @@ export interface IUserHandlers {
   update: RequestHandler<
     { id: string },
     TUserWithoutPassword | ResponseError,
-    TUserBody
+    TUserBodyUpdate
   >;
   delete: RequestHandler<
     { id: string },

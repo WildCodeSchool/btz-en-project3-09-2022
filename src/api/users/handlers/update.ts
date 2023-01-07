@@ -8,7 +8,6 @@ const updateUser: IUserHandlers["update"] = async (req, res) => {
       birthday,
       email,
       firstname,
-      password,
       imageUrl,
       isDisabled,
       lastname,
@@ -22,7 +21,6 @@ const updateUser: IUserHandlers["update"] = async (req, res) => {
         birthday,
         email,
         firstname,
-        password,
         imageUrl,
         isDisabled,
         lastname,
@@ -30,7 +28,9 @@ const updateUser: IUserHandlers["update"] = async (req, res) => {
         workLocation,
       },
     });
-    res.status(200).json(updatedUser);
+
+    const { password: removedPassword, ...userWithoutPassword } = updatedUser;
+    res.status(200).json(userWithoutPassword);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error });

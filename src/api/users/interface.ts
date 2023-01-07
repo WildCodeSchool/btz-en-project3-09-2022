@@ -2,7 +2,7 @@ import { User } from "@prisma/client";
 import { RequestHandler } from "express";
 import ResponseError from "../ResponseError";
 
-type TUserWithoutPassword = Omit<User, "password">;
+export type TUserWithoutPassword = Omit<User, "password">;
 
 type TUserBody = Omit<User, "id" | "createdAt" | "updatedAt">;
 

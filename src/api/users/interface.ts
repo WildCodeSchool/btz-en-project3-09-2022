@@ -2,26 +2,28 @@ import { User } from "@prisma/client";
 import { RequestHandler } from "express";
 import ResponseError from "../ResponseError";
 
-type TAuthorBodyCreate = {
-  imageUrl: string;
-  firstname: string;
-  lastname: string;
-  workLocation: string;
-  birthday: Date;
-  email: string;
-  password: string;
-  teamId: string;
-  isDisabled: boolean;
-};
+export type TUserWithoutPassword = Omit<User, "password">;
+
+type TUserBody = Omit<User, "id" | "createdAt" | "updatedAt">;
+
+type TUserBodyUpdate = Omit<TUserBody, "password">;
 
 export interface IUserHandlers {
-  getAll: RequestHandler<null, User[] | ResponseError, null>;
-  getOne: RequestHandler<{ id: string }, User | ResponseError, null>;
-  create: RequestHandler<null, User | ResponseError, TAuthorBodyCreate>;
+  getAll: RequestHandler<null, TUserWithoutPassword[] | ResponseError, null>;
+  getOne: RequestHandler<
+    { id: string },
+    TUserWithoutPassword | ResponseError,
+    null
+  >;
+  create: RequestHandler<null, TUserWithoutPassword | ResponseError, TUserBody>;
   update: RequestHandler<
     { id: string },
-    User | ResponseError,
-    TAuthorBodyCreate
+    TUserWithoutPassword | ResponseError,
+    TUserBodyUpdate
   >;
-  delete: RequestHandler<{ id: string }, User | ResponseError, null>;
+  delete: RequestHandler<
+    { id: string },
+    TUserWithoutPassword | ResponseError,
+    null
+  >;
 }

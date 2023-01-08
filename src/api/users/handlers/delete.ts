@@ -10,7 +10,8 @@ const deleteOneUser: IUserHandlers["delete"] = async (req, res) => {
         id,
       },
     });
-    res.status(200).json(deletedUser);
+    const { password: removedPassword, ...userWithoutPassword } = deletedUser;
+    res.status(200).json(userWithoutPassword);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error });

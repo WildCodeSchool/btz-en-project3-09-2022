@@ -3,10 +3,12 @@ import { ITeamHandlers } from "./../interface";
 
 const getOneTeam: ITeamHandlers["getOne"] = async (req, res) => {
   const { id } = req.params;
+  const { members } = req.query;
 
   try {
     const Oneteam = await prisma.team.findUniqueOrThrow({
       where: { id },
+      include: { members: members === "true" ? true : false },
     });
     res.status(200).json(Oneteam);
   } catch (error) {

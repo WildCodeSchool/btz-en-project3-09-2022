@@ -4,7 +4,7 @@ import { SpaceHandlers } from "./../interface";
 import prisma from "../../../../prisma/client";
 
 const createSpace: SpaceHandlers["create"] = async (req, res) => {
-  const { name, imageUrl, siteId, ownerId } = req.body;
+  const { name, imageUrl, siteId, ownerId, description } = req.body;
   try {
     const createSpace = await prisma.space.create({
       data: {
@@ -12,6 +12,7 @@ const createSpace: SpaceHandlers["create"] = async (req, res) => {
         imageUrl,
         siteId,
         ownerId,
+        description,
       },
     });
     res.status(200).json(createSpace);

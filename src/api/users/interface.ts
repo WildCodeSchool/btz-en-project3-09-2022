@@ -8,8 +8,15 @@ type TUserBody = Omit<User, "id" | "createdAt" | "updatedAt">;
 
 type TUserBodyUpdate = Omit<TUserBody, "password">;
 
+type TUserQuery = { team: string; limit: string };
+
 export interface IUserHandlers {
-  getAll: RequestHandler<null, TUserWithoutPassword[] | ResponseError, null>;
+  getAll: RequestHandler<
+    null,
+    TUserWithoutPassword[] | ResponseError,
+    null,
+    TUserQuery
+  >;
   getOne: RequestHandler<
     { id: string },
     TUserWithoutPassword | ResponseError,

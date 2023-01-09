@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { PrismaClient, User } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 import * as dotenv from "dotenv";
@@ -33,7 +35,7 @@ async function main() {
 }
 
 main()
-  .catch((e: any) => {
+  .catch((e: object) => {
     console.error(e);
     process.exit(1);
   })

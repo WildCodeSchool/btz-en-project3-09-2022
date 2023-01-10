@@ -6,8 +6,12 @@ type TTeamBody = {
   name: string;
 };
 
+type TQueryParam = {
+  members: string;
+};
+
 export interface ITeamHandlers {
-  getAll: RequestHandler<null, Team[] | ResponseError, null>;
+  getAll: RequestHandler<null, Team[] | ResponseError, null, TQueryParam>;
   getOne: RequestHandler<{ id: string }, Team | ResponseError, null>;
   create: RequestHandler<null, Team | ResponseError, TTeamBody>;
   update: RequestHandler<{ id: string }, Team | ResponseError, TTeamBody>;

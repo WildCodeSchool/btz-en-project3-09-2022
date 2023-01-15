@@ -13,6 +13,7 @@ const signIn: IAuthController["signIn"] = async (req, res, next) => {
       where: {
         email: email,
       },
+      include: { spaces: true },
     });
 
     if (!(await argon2.verify(logUser.password, password))) {

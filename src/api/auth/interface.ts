@@ -1,6 +1,7 @@
 import ResponseError from "./../ResponseError";
 import { User } from "@prisma/client";
 import { RequestHandler } from "express";
+import { JwtPayload } from "jsonwebtoken";
 
 type TUserWithoutPassword = Omit<User, "password">;
 type TUserRegisterBody = Pick<
@@ -32,6 +33,7 @@ interface IAuthController {
     TLoginBody,
     null
   >;
+  me: RequestHandler<null, JwtPayload | ResponseError, null, null>;
 }
 
 export default IAuthController;

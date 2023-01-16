@@ -13,11 +13,11 @@ function exclude<User, Key extends keyof User>(
 }
 
 const getAllUsers: IUserHandlers["getAll"] = async (req, res) => {
-  const { team, limit } = req.query;
+  const { userExcluded, team, limit } = req.query;
   const limitParsed = parseInt(limit);
   try {
     const users = await prisma.user.findMany({
-      where: { teamId: { contains: team } },
+      where: { teamId: { contains: team }, id: { not: userExcluded } },
       take: limitParsed ? limitParsed : undefined,
       skip: 0,
       orderBy: [

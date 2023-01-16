@@ -13,6 +13,11 @@ const createSpace: SpaceHandlers["create"] = async (req, res) => {
         siteId,
         ownerId,
         description,
+        members: {
+          connect: {
+            id: ownerId,
+          },
+        },
       },
     });
     res.status(200).json(createSpace);

@@ -5,5 +5,6 @@ const router = Router();
 
 router.post("/signin", controller.signIn);
 router.post("/signup", controller.signUp);
+router.post("/me", controller.me);
 
 export default router;

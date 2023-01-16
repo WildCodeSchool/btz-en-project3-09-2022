@@ -7,7 +7,8 @@
     "lib": ["esnext"],
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "types": ["node"]
+    "typeRoots": ["./types"],
+    "declaration": true
   },
   "exclude": ["dist", "prisma", "node_modules"]
 }

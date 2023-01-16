@@ -9,10 +9,13 @@ import images from "./images/routes";
 import spaces from "./spaces/routes";
 import comments from "./comments/routes";
 import auth from "./auth/routes";
+import checkToken from "../middlewares/auth/checkToken";
 
 const router = Router();
 
 router.use("/auth", auth);
+
+router.use(checkToken);
 router.use("/users", users);
 router.use("/teams", teams);
 router.use("/posts", posts);

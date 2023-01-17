@@ -9,6 +9,7 @@ const getOneUser: IUserHandlers["getOne"] = async (req, res) => {
       where: {
         id,
       },
+      include: { team: true },
     });
     const { password: removedPassword, ...userWithoutPassword } = user;
     res.status(200).json(userWithoutPassword);

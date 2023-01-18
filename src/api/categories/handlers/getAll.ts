@@ -5,7 +5,7 @@ import prisma from "../../../../prisma/client";
 
 const getAllCategories: CategoryHandlers["getAll"] = async (req, res) => {
   const { id, role } = req.user;
-  const { userId } = req.query;
+  const { userID } = req.query;
 
   if (role === "ADMIN" || role === "SUPER_ADMIN") {
     try {
@@ -17,13 +17,13 @@ const getAllCategories: CategoryHandlers["getAll"] = async (req, res) => {
     }
   }
 
-  if (role === "USER" && typeof userId === "string") {
+  if (role === "USER" && typeof userID === "string") {
     try {
       const categories = await prisma.category.findMany({
         where: {
           members: {
             some: {
-              id: { equals: userId },
+              id: { equals: userID },
             },
           },
         },
@@ -35,7 +35,7 @@ const getAllCategories: CategoryHandlers["getAll"] = async (req, res) => {
     }
   }
 
-  if (role === "USER" && typeof userId !== "string") {
+  if (role === "USER" && typeof userID !== "string") {
     try {
       const categories = await prisma.category.findMany({
         where: {

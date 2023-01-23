@@ -14,6 +14,9 @@ const getAllComments: ICommentHandlers["getAll"] = async (req, res) => {
           },
         },
       },
+      include: {
+        author: true,
+      },
     });
     res.status(200).json(comments);
   } catch (error) {

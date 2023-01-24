@@ -6,6 +6,7 @@ type TCommentBody = Omit<Comment, "id" | "createdAt" | "updatedAt">;
 
 type QueryParam = {
   postId?: string;
+  author?: string;
 };
 
 export interface ICommentHandlers {

@@ -1,10 +1,4 @@
 {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  "peacock.color": "#dd0531"
-=======
->>>>>>> a9c9d6d (Modify the create of Images to restrain upload as auth + add middleware to upload to cloudinary and parse before saving the url in database (table Images).)
   "peacock.color": "#dd0531",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#fa1b49",
@@ -24,8 +18,4 @@
     "titleBar.inactiveBackground": "#dd053199",
     "titleBar.inactiveForeground": "#e7e7e799"
   }
-<<<<<<< HEAD
-=======
->>>>>>> 6287e27 (Modify the create of Images to restrain upload as auth + add middleware to upload to cloudinary and parse before saving the url in database (table Images).)
->>>>>>> a9c9d6d (Modify the create of Images to restrain upload as auth + add middleware to upload to cloudinary and parse before saving the url in database (table Images).)
 }

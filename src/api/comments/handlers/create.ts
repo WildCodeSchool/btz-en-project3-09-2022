@@ -6,7 +6,19 @@ const createComment: ICommentHandlers["create"] = async (req, res) => {
   try {
     const { authorId, content, postId } = req.body;
     const newComment = await prisma.comment.create({
-      data: { content, authorId, postId },
+      data: {
+        content,
+        author: {
+          connect: {
+            id: authorId,
+          },
+        },
+        post: {
+          connect: {
+            id: postId,
+          },
+        },
+      },
     });
     res.status(200).json(newComment);
   } catch (error) {

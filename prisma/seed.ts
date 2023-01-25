@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { faker } from "@faker-js/faker";
-import { PrismaClient, User, Site } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import * as dotenv from "dotenv";
 
 const prisma = new PrismaClient();
@@ -25,20 +25,20 @@ const fakerUser = (): User => ({
 
 const userArray = new Array(10).fill(null).map(() => fakerUser());
 
-const userIdArray = userArray.map((user) => user.id);
-const rand = Math.floor(Math.random() * userIdArray.length);
+// const userIdArray = userArray.map((user) => user.id);
+// const rand = Math.floor(Math.random() * userIdArray.length);
 
-const fakerSite = (): Site => ({
-  id: faker.datatype.uuid(),
-  name: faker.random.word(),
-  userId: userIdArray[rand],
-  imageUrl: faker.image.city(),
-  createdAt: faker.date.past(),
-  updatedAt: faker.date.past(),
-});
+// const fakerSite = (): Site => ({
+//   id: faker.datatype.uuid(),
+//   name: faker.random.word(),
+//   userId: userIdArray[rand],
+//   imageUrl: faker.image.city(),
+//   createdAt: faker.date.past(),
+//   updatedAt: faker.date.past(),
+// });
 
 async function main() {
-  const fakerRounds = 1;
+  const fakerRounds = 10;
   dotenv.config();
   console.log("Seeding...");
   console.log(userArray);
@@ -48,9 +48,9 @@ async function main() {
     await prisma.user.create({ data: fakerUser() });
   }
   /// --------- Sites ---------------
-  for (let i = 0; i < fakerRounds; i++) {
-    await prisma.site.create({ data: fakerSite() });
-  }
+  // for (let i = 0; i < fakerRounds; i++) {
+  //   await prisma.site.create({ data: fakerSite() });
+  // }
 }
 
 main()

@@ -9,7 +9,9 @@ const getAllCategories: CategoryHandlers["getAll"] = async (req, res) => {
 
   if (role === "ADMIN" || role === "SUPER_ADMIN") {
     try {
-      const categories = await prisma.category.findMany();
+      const categories = await prisma.category.findMany({
+        orderBy: { name: "asc" },
+      });
       return res.status(200).json(categories);
     } catch (error) {
       console.log(error);
@@ -27,6 +29,7 @@ const getAllCategories: CategoryHandlers["getAll"] = async (req, res) => {
             },
           },
         },
+        orderBy: { name: "asc" },
       });
       res.status(200).json(categories);
     } catch (error) {
@@ -45,6 +48,7 @@ const getAllCategories: CategoryHandlers["getAll"] = async (req, res) => {
             },
           },
         },
+        orderBy: { name: "asc" },
       });
       res.status(200).json(categories);
     } catch (error) {

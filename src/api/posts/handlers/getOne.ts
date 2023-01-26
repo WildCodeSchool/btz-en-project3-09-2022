@@ -3,6 +3,7 @@ import IPostHandler from "../interface";
 
 const getOnePost: IPostHandler["getOne"] = async (req, res) => {
   const { id } = req.params;
+  const { category, limit, image } = req.query;
 
   try {
     const onePost = await prisma.post.findUniqueOrThrow({

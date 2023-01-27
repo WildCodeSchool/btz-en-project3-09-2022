@@ -11,8 +11,9 @@ type TUserBodyUpdate = Omit<TUserBody, "password">;
 type TUserQuery = {
   userExcluded: string;
   team: string;
-  spaceId: string;
   limit: string;
+  spaceId: string;
+  categoryId: string;
 };
 
 export interface IUserHandlers {

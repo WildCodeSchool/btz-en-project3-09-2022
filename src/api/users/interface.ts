@@ -8,7 +8,12 @@ type TUserBody = Omit<User, "id" | "createdAt" | "updatedAt">;
 
 type TUserBodyUpdate = Omit<TUserBody, "password">;
 
-type TUserQuery = { userExcluded: string; team: string; limit: string };
+type TUserQuery = {
+  userExcluded: string;
+  team: string;
+  spaceId: string;
+  limit: string;
+};
 
 export interface IUserHandlers {
   getAll: RequestHandler<

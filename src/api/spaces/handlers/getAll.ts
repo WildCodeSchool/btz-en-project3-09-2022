@@ -3,7 +3,7 @@ import { SpaceHandlers } from "./../interface";
 import prisma from "../../../../prisma/client";
 
 const getAllSpaces: SpaceHandlers["getAll"] = async (req, res) => {
-  const { categories } = req.query;
+  const { categories, owner } = req.query;
 
   if (req.user.role === "ADMIN" || req.user.role === "SUPER_ADMIN") {
     try {
@@ -34,6 +34,7 @@ const getAllSpaces: SpaceHandlers["getAll"] = async (req, res) => {
                   orderBy: { name: "asc" },
                 }
               : false,
+          owner: owner === "true" ? true : false,
         },
         orderBy: { name: "asc" },
       });

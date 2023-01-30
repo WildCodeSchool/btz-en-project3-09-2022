@@ -8,7 +8,12 @@ type TSpaceQuery = { categories?: string };
 
 export interface SpaceHandlers {
   getAll: RequestHandler<null, Space[] | ResponseError, null, TSpaceQuery>;
-  getOne: RequestHandler<{ id: string }, Space | ResponseError, null>;
+  getOne: RequestHandler<
+    { id: string },
+    Space | ResponseError,
+    null,
+    TSpaceQuery
+  >;
   create: RequestHandler<{ id: string }, Space | ResponseError, TSpaceBody>;
   update: RequestHandler<{ id: string }, Space | ResponseError, TSpaceBody>;
   delete: RequestHandler;

@@ -29,7 +29,10 @@ const getAllSpaces: SpaceHandlers["getAll"] = async (req, res) => {
         include: {
           categories:
             categories === "true"
-              ? { where: { members: { some: { id: req.user.id } } } }
+              ? {
+                  where: { members: { some: { id: req.user.id } } },
+                  orderBy: { name: "asc" },
+                }
               : false,
         },
         orderBy: { name: "asc" },

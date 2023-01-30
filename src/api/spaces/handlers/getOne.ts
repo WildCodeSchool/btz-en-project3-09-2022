@@ -6,7 +6,7 @@ import prisma from "../../../../prisma/client";
 const getOneSpace: SpaceHandlers["getOne"] = async (req, res) => {
   const { id } = req.params;
   const { id: userId } = req.user;
-  const { categories } = req.query;
+  const { categories, owner } = req.query;
   try {
     const getSpace = await prisma.space.findUniqueOrThrow({
       where: {
@@ -20,6 +20,7 @@ const getOneSpace: SpaceHandlers["getOne"] = async (req, res) => {
                 orderBy: { name: "asc" },
               }
             : false,
+        owner: owner === "true" ? true : false,
       },
     });
     res.status(200).json(getSpace);

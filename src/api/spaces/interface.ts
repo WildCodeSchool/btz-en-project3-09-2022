@@ -4,7 +4,7 @@ import ResponseError from "../ResponseError";
 
 type TSpaceBody = Omit<Space, "id" | "createdAt" | "updatedAt">;
 
-type TSpaceQuery = { categories?: string };
+type TSpaceQuery = { categories?: string; owner?: string };
 
 export interface SpaceHandlers {
   getAll: RequestHandler<null, Space[] | ResponseError, null, TSpaceQuery>;

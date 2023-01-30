@@ -1,22 +1,26 @@
 {
   "name": "ts-project-template-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "This template is meant to serve as a foundation for Biarritz P3 following the Typescript Express stack, as learned in Wild Code School. It's pre-configured with a set of tools which'll help students produce industry-quality and easier-to-maintain code, while staying as simple as possible to use.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npx prisma generate && tsc",
     "start": "node dist/src/index.js",
     "dev": "ts-node-dev --respawn --exit-child ./src/index.ts",
     "lint": "echo '----- Checking Backend...' && npx prettier --debug-check . && eslint --ext .ts . && echo '----- Done!'",
     "setup": "npm install && husky install",
+    "deploy": "npm run build && node ./dist/src/index.js",
     "prepare": "husky install"
   },
   "keywords": [],
   "author": "Wild Code School",
   "license": "ISC",
   "devDependencies": {
+    "@types/cookies": "^0.7.7",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.14",
-    "@types/node": "^18.11.9",
+    "@types/jsonwebtoken": "^9.0.0",
+    "@types/node": "^18.11.17",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "eslint": "^8.28.0",
@@ -24,11 +28,29 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^7.0.0",
+    "husky": "^7.0.4",
+    "prisma": "^4.7.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "express": "^4.18.2"
-  }
+    "@prisma/client": "^4.7.1",
+    "@types/multiparty": "^0.0.33",
+    "argon2": "^0.30.2",
+    "cloudinary": "^1.33.0",
+    "cookies": "^0.8.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "multiparty": "^4.2.3",
+    "prisma-erd-generator": "^1.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WildCodeSchool/btz-enedis-project3-09-2022.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WildCodeSchool/btz-enedis-project3-09-2022/issues"
+  },
+  "homepage": "https://github.com/WildCodeSchool/btz-enedis-project3-09-2022#readme"
 }

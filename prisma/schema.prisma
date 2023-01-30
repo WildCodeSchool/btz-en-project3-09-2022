@@ -1,0 +1,213 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// generator erd {
+//   provider = "prisma-erd-generator"
+// }
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @unique @default(uuid())
+  role Role @default(USER)
+  imageUrl String?
+  firstname String
+  lastname String
+  team Team @relation(fields: [teamId], references: [id])
+  teamId String
+  workLocation String
+  birthday DateTime @db.Date
+  showBirthday Boolean @default(false)
+  email String @unique
+  showEmail Boolean @default(false)
+  password String
+  images Image[]
+  posts Post[]
+  isDisabled Boolean @default(false)
+  spaces Space[]
+  categories Category[]
+  inCategories Category[] @relation("category_members")
+  inSpaces Space[] @relation("space_members")
+  inSites Site[] @relation("site_members")
+  comments Comment[]
+  sites Site[]
+  site_permissions SitePermission[]
+  post_permissions PostPermission[]
+  category_permissions CategoryPermission[]
+  space_permissions SpacePermission[]
+  notifications Notification[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SitePermission {
+  id String @id @default(uuid())
+  name Permission @default(READ)
+  read Boolean @default(false)
+  write Boolean @default(false)
+  update Boolean @default(false)
+  delete Boolean @default(false)
+  own Boolean @default(false)
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  site Site @relation(fields: [siteId],references: [id])
+  siteId String
+}
+
+model PostPermission {
+  id String @id @default(uuid())
+  name Permission @default(READ)
+  read Boolean @default(false)
+  write Boolean @default(false)
+  update Boolean @default(false)
+  delete Boolean @default(false)
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  post Post @relation(fields: [postId],references: [id])
+  postId String
+}
+
+model CategoryPermission {
+  id String @id @default(uuid())
+  name Permission @default(READ)
+  read Boolean @default(false)
+  write Boolean @default(false)
+  update Boolean @default(false)
+  delete Boolean @default(false)
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+}
+
+model SpacePermission {
+  id String @id @default(uuid())
+  name Permission @default(READ)
+  read Boolean @default(false)
+  write Boolean @default(false)
+  update Boolean @default(false)
+  delete Boolean @default(false)
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  space Space @relation(fields: [spaceId], references: [id])
+  spaceId String
+}  
+
+model Site {
+  id String @id @unique @default(uuid())
+  name String @unique
+  user User @relation(fields: [userId], references: [id])
+  spaces Space[]
+  userId String
+  imageUrl String
+  members User[] @relation("site_members")
+  permissions SitePermission[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Space {
+  id String @id @unique @default(uuid())
+  name String @unique
+  imageUrl String
+  description String
+  site Site @relation(fields: [siteId], references: [id])
+  siteId String
+  owner User @relation(fields: [ownerId],references: [id])
+  ownerId String
+  members User[] @relation("space_members")
+  permissions SpacePermission[]
+  categories Category[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id String @id @unique @default(uuid())
+  name String
+  imageUrl String
+  space Space @relation(fields: [spaceId], references: [id])
+  spaceId String
+  owner User @relation(fields: [ownerId],references: [id])
+  ownerId String
+  members User[] @relation("category_members")
+  permissions CategoryPermission[]
+  posts Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id String @id @unique @default(uuid())
+  title String
+  content String
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  author User? @relation(fields: [authorId], references: [id])
+  authorId String?
+  images Image[]
+  comments Comment[]
+  permissions PostPermission[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id String @id @unique @default(uuid())
+  content String
+  post Post @relation(fields: [postId], references: [id])
+  postId String
+  author User @relation(fields: [authorId],references: [id])
+  authorId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Image {
+  id String @id @unique @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  post Post? @relation(fields: [postId], references: [id])
+  postId String? 
+  name String
+  url String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Team {
+  id String @id @unique @default(uuid())
+  name String @unique
+  members User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+    id String @id @unique @default(uuid())
+    type String
+    content String
+    link String
+    user User @relation(fields: [userId], references: [id])
+    userId String
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+enum Permission {
+  WRITE
+  READ
+  UPDATE
+  DELETE
+}

@@ -22,6 +22,7 @@ const createCategory: CategoryHandlers["create"] = async (req, res) => {
             imageUrl: dataImage.securePath,
             spaceId: spaceId[0],
             ownerId: ownerId[0],
+            members: { connect: { id: ownerId[0] } },
           },
         });
         res.status(200).json(createCategory);

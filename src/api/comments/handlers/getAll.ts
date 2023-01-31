@@ -5,13 +5,15 @@ import prisma from "../../../../prisma/client";
 
 const getAllComments: ICommentHandlers["getAll"] = async (req, res) => {
   const { postId, author } = req.query;
+  const { id: userId } = req.user;
   try {
     const comments = await prisma.comment.findMany({
       where: {
         post: {
-          id: {
-            contains: postId ? postId : "",
-          },
+          category: { members: { some: { id: { equals: userId } } } },
+        },
+        postId: {
+          equals: postId,
         },
       },
       include: {

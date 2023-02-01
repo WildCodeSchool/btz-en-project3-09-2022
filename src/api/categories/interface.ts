@@ -4,15 +4,15 @@ import ResponseError from "../ResponseError";
 
 type TCategoryBody = Omit<Category, "id" | "createdAt" | "updatedAt">;
 
-type TQueryCategory = { space: string };
+type TQuery = { userID?: string; space?: string };
 
 export interface CategoryHandlers {
-  getAll: RequestHandler<null, Category[] | ResponseError, null>;
+  getAll: RequestHandler<null, Category[] | ResponseError, null, TQuery>;
   getOne: RequestHandler<
     { id: string },
     Category | ResponseError,
     null,
-    TQueryCategory
+    TQuery
   >;
   create: RequestHandler<
     { id: string },

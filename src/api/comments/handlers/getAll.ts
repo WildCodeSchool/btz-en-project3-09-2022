@@ -19,6 +19,7 @@ const getAllComments: ICommentHandlers["getAll"] = async (req, res) => {
       include: {
         author: author === "true" ? true : false,
       },
+      orderBy: { createdAt: "asc" },
     });
     res.status(200).json(comments);
   } catch (error) {

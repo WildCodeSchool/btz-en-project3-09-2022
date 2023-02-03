@@ -26,7 +26,9 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send(
+    "Bienvenue sur l'API Enedis Share ! Commencez votre recherche en ajoutant /api/v1 à l'url de base, puis ajoutez-y le nom de la ressource recherchée"
+  );
 });
 
 app.use("/api/v1", api);

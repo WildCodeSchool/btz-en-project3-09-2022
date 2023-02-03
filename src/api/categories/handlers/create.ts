@@ -8,7 +8,16 @@ const createCategory: CategoryHandlers["create"] = async (req, res) => {
   const { fields, files } = await asyncFormParse(req);
   const { name, spaceId, ownerId } = fields;
 
-  if (name[0] && spaceId[0] && ownerId[0] && files.categoryImage[0]) {
+  if (
+    name &&
+    spaceId &&
+    ownerId &&
+    files &&
+    name[0] &&
+    spaceId[0] &&
+    ownerId[0] &&
+    files.categoryImage[0]
+  ) {
     try {
       const dataImage = await uploadImage(
         files.categoryImage[0].path,

@@ -3,6 +3,7 @@ import { Category } from "@prisma/client";
 import ResponseError from "../ResponseError";
 
 type TCategoryBody = Omit<Category, "id" | "createdAt" | "updatedAt">;
+type TAddUserBody = string[];
 
 type TQuery = { userID?: string; space?: string };
 
@@ -24,5 +25,12 @@ export interface CategoryHandlers {
     Category | ResponseError,
     TCategoryBody
   >;
+
+  // TODO: WTF IS THIS ?
   delete: RequestHandler;
+  addUser: RequestHandler<
+    { id: string },
+    Category | ResponseError,
+    TAddUserBody
+  >;
 }

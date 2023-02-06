@@ -6,6 +6,11 @@ import prisma from "../../../../prisma/client";
 const deleteCategory: CategoryHandlers["delete"] = async (req, res) => {
   const { id } = req.params;
   try {
+    if (!req.user || req.user.role !== "SUPER_ADMIN") {
+      return res
+        .status(403)
+        .json({ message: "Forbidden, you don't have the right access" });
+    }
     const deleteCategory = await prisma.category.delete({
       where: {
         id: id,

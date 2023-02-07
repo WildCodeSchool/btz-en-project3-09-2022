@@ -8,7 +8,27 @@ const removeUser: SpaceHandlers["removeUser"] = async (req, res) => {
 
   try {
     const updatedSpace = await prisma.space.update({
-      where: { id },
+      where: {
+        id,
+      },
+      data: {
+        members: {
+          disconnect: usersToDisconnect.map((userId) => ({ id: userId })),
+        },
+      },
+      include: {
+        categories: true,
+      },
+    });
+
+    const generalCategory = updatedSpace.categories.find(
+      (cat) => cat.name === "Général"
+    );
+
+    await prisma.category.update({
+      where: {
+        id: generalCategory?.id,
+      },
       data: {
         members: {
           disconnect: usersToDisconnect.map((userId) => ({ id: userId })),

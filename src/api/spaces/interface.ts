@@ -30,4 +30,6 @@ export interface SpaceHandlers {
     Space | ResponseError,
     TRemoveUserBody
   >;
+  disable: RequestHandler<{ id: string }, Space | ResponseError, null>;
+  undisable: RequestHandler<{ id: string }, Space | ResponseError, null>;
 }

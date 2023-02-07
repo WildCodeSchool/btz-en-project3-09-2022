@@ -15,18 +15,27 @@ const addUser: SpaceHandlers["addUser"] = async (req, res) => {
         members: {
           connect: usersToConnect.map((userId) => ({ id: userId })),
         },
-        // categories: {
-        //   updateMany: {
-        //     where: { isGeneral: true },
-        //     data: {
-        //       members: {
-        //         connect: usersToConnect.map((userId) => ({ id: userId })),
-        //       },
-        //     },
-        //   },
-        // },
+      },
+      include: {
+        categories: true,
       },
     });
+
+    const generalCategory = updatedSpace.categories.find(
+      (cat) => cat.name === "Général"
+    );
+
+    await prisma.category.update({
+      where: {
+        id: generalCategory?.id,
+      },
+      data: {
+        members: {
+          connect: usersToConnect.map((userId) => ({ id: userId })),
+        },
+      },
+    });
+
     res.status(200).json(updatedSpace);
   } catch (error) {
     console.log(error);

@@ -37,4 +37,6 @@ export interface CategoryHandlers {
     Category | ResponseError,
     TRemoveUserBody
   >;
+  disable: RequestHandler<{ id: string }, Category | ResponseError, null>;
+  undisable: RequestHandler<{ id: string }, Category | ResponseError, null>;
 }

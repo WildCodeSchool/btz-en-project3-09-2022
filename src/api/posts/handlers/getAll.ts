@@ -62,7 +62,7 @@ const getAllPosts: IPostHandler["getAll"] = async (req, res) => {
         },
 
         include: {
-          images: image === "true" ? true : false,
+          images: image === "true" ? { where: { isDisabled: false } } : false,
           category: category === "true" ? true : false,
           author: author === "true" ? true : false,
         },

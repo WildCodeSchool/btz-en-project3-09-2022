@@ -19,4 +19,6 @@ export default interface IPostHandler {
   create: RequestHandler<null, Post | ResponseError, TPostBody>;
   update: RequestHandler<{ id: string }, Post | ResponseError, TPostBody>;
   delete: RequestHandler<{ id: string }, Post | ResponseError, null>;
+  disable: RequestHandler<{ id: string }, Post | ResponseError, null>;
+  undisable: RequestHandler<{ id: string }, Post | ResponseError, null>;
 }

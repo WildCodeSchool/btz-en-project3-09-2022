@@ -17,4 +17,6 @@ export interface ICommentHandlers {
   create: RequestHandler<null, Comment | ResponseError, TCommentBody>;
   update: RequestHandler<{ id: string }, Comment | ResponseError, TCommentBody>;
   delete: RequestHandler<{ id: string }, Comment | ResponseError, null>;
+  disable: RequestHandler<{ id: string }, Comment | ResponseError, null>;
+  undisable: RequestHandler<{ id: string }, Comment | ResponseError, null>;
 }

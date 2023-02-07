@@ -16,7 +16,7 @@ const getOneSpace: SpaceHandlers["getOne"] = async (req, res) => {
         categories:
           categories === "true"
             ? {
-                where: { members: { some: { id: userId } } },
+                where: { members: { some: { id: userId } }, isDisabled: false },
                 orderBy: { name: "asc" },
               }
             : false,

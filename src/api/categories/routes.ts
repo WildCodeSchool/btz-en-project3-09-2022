@@ -17,5 +17,7 @@ router.put(
   checkIfIsOwner("category"),
   controller.removeUser
 );
+router.put("/:id/disable", checkIfIsOwner("category"), controller.disable);
+router.put("/:id/undisable", checkIfIsOwner("category"), controller.undisable);
 
 export default router;

@@ -11,5 +11,7 @@ router.get("/:id", checkIfIsDisabledForGetOne("post"), controller.getOne);
 router.post("/", controller.create);
 router.put("/:id", checkIfIsAuthor("post"), controller.update);
 router.delete("/:id", checkIfIsAdminOrSuper(), controller.delete);
+router.put("/:id/disable", checkIfIsAdminOrSuper(), controller.disable);
+router.put("/:id/undisable", checkIfIsAdminOrSuper(), controller.undisable);
 
 export default router;

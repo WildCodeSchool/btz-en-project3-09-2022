@@ -13,5 +13,7 @@ router.put("/:id", checkIfIsOwner("space"), controller.update);
 router.delete("/:id", checkIfIsAdminOrSuper(), controller.delete);
 router.put("/:id/addUser", checkIfIsOwner("space"), controller.addUser);
 router.put("/:id/removeUser", checkIfIsOwner("space"), controller.removeUser);
+router.put("/:id/disable", checkIfIsAdminOrSuper(), controller.disable);
+router.put("/:id/undisable", checkIfIsAdminOrSuper(), controller.undisable);
 
 export default router;

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import checkIfIsAdminOrSuper from "../../middlewares/permissions/checkIfIsAdminOrSuper";
 import controller from "./controller";
 
 const router = Router();
@@ -8,8 +9,8 @@ router.get("/:id", controller.getOne);
 
 router.post("/", controller.create);
 
-router.put("/:id", controller.update);
+router.put("/:id", checkIfIsAdminOrSuper(), controller.update);
 
-router.delete("/:id", controller.delete);
+router.delete("/:id", checkIfIsAdminOrSuper(), controller.delete);
 
 export default router;

@@ -1,19 +1,17 @@
 /* eslint-disable no-console */
 import prisma from "../../../../prisma/client";
-import { CategoryHandlers } from "./../interface";
+import { CategoryHandlers } from "../interface";
 
-const addUser: CategoryHandlers["addUser"] = async (req, res) => {
+const removeUser: CategoryHandlers["removeUser"] = async (req, res) => {
   const { id } = req.params;
-  const usersToConnect = req.body;
+  const usersToDisconnect = req.body;
 
   try {
     const updatedCategory = await prisma.category.update({
-      where: {
-        id,
-      },
+      where: { id },
       data: {
         members: {
-          connect: usersToConnect.map((userId) => ({ id: userId })),
+          disconnect: usersToDisconnect.map((userId) => ({ id: userId })),
         },
       },
     });
@@ -24,4 +22,4 @@ const addUser: CategoryHandlers["addUser"] = async (req, res) => {
   }
 };
 
-export default addUser;
+export default removeUser;

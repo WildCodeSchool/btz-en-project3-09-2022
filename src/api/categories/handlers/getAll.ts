@@ -27,6 +27,7 @@ const getAllCategories: CategoryHandlers["getAll"] = async (req, res) => {
           AND: [
             { members: { some: { id: { equals: id } } } },
             { members: { some: { id: { equals: userID } } } },
+            { isDisabled: false },
           ],
         },
         orderBy: { name: "asc" },

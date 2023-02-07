@@ -4,6 +4,7 @@ import ResponseError from "../ResponseError";
 
 type TCategoryBody = Omit<Category, "id" | "createdAt" | "updatedAt">;
 type TAddUserBody = string[];
+type TRemoveUserBody = string[];
 
 type TQuery = { userID?: string; space?: string };
 
@@ -25,12 +26,15 @@ export interface CategoryHandlers {
     Category | ResponseError,
     TCategoryBody
   >;
-
-  // TODO: WTF IS THIS ?
-  delete: RequestHandler;
+  delete: RequestHandler<{ id: string }, Category | ResponseError, null>;
   addUser: RequestHandler<
     { id: string },
     Category | ResponseError,
     TAddUserBody
+  >;
+  removeUser: RequestHandler<
+    { id: string },
+    Category | ResponseError,
+    TRemoveUserBody
   >;
 }

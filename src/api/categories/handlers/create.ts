@@ -6,7 +6,7 @@ import asyncFormParse from "../../../middlewares/upload/formParse";
 
 const createCategory: CategoryHandlers["create"] = async (req, res) => {
   const { fields, files } = await asyncFormParse(req);
-  const { name, spaceId, ownerId } = fields;
+  const { name, description, spaceId, ownerId } = fields;
 
   if (
     name &&
@@ -28,6 +28,7 @@ const createCategory: CategoryHandlers["create"] = async (req, res) => {
         const createCategory = await prisma.category.create({
           data: {
             name: name[0],
+            description: description[0],
             imageUrl: dataImage.securePath,
             spaceId: spaceId[0],
             ownerId: ownerId[0],

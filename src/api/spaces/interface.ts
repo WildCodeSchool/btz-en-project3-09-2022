@@ -6,6 +6,9 @@ type TSpaceBody = Omit<Space, "id" | "createdAt" | "updatedAt">;
 
 type TSpaceQuery = { categories?: string; owner?: string };
 
+type TAddUserBody = string[];
+type TRemoveUserBody = string[];
+
 export interface SpaceHandlers {
   getAll: RequestHandler<null, Space[] | ResponseError, null, TSpaceQuery>;
   getOne: RequestHandler<
@@ -14,7 +17,17 @@ export interface SpaceHandlers {
     null,
     TSpaceQuery
   >;
-  create: RequestHandler<{ id: string }, Space | ResponseError, TSpaceBody>;
+  create: RequestHandler<
+    { id: string },
+    Space | ResponseError | string,
+    TSpaceBody
+  >;
   update: RequestHandler<{ id: string }, Space | ResponseError, TSpaceBody>;
   delete: RequestHandler;
+  addUser: RequestHandler<{ id: string }, Space | ResponseError, TAddUserBody>;
+  removeUser: RequestHandler<
+    { id: string },
+    Space | ResponseError,
+    TRemoveUserBody
+  >;
 }

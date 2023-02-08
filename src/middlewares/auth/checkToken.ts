@@ -1,3 +1,4 @@
+import { TUserWithoutPassword } from "./../../api/users/interface";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import getSecretKey from "../../utils/auth";
@@ -17,7 +18,7 @@ const checkToken = async (req: Request, res: Response, next: NextFunction) => {
     throw new Error(decodedToken);
   }
 
-  req.user = decodedToken;
+  req.user = decodedToken as TUserWithoutPassword;
 
   next();
 };

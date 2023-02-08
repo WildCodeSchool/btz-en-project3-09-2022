@@ -3,12 +3,14 @@ import { SpaceHandlers } from "./../interface";
 import prisma from "../../../../prisma/client";
 
 const getAllSpaces: SpaceHandlers["getAll"] = async (req, res) => {
-  const { categories } = req.query;
+  const { categories, owner } = req.query;
 
   if (req.user.role === "ADMIN" || req.user.role === "SUPER_ADMIN") {
     try {
       const spaces = await prisma.space.findMany({
-        include: { categories: categories === "true" ? true : false },
+        include: {
+          categories: categories === "true" ? true : false,
+        },
       });
       res.status(200).json(spaces);
     } catch (error) {
@@ -25,15 +27,20 @@ const getAllSpaces: SpaceHandlers["getAll"] = async (req, res) => {
               id: req.user.id,
             },
           },
+          isDisabled: false,
         },
         include: {
           categories:
             categories === "true"
               ? {
-                  where: { members: { some: { id: req.user.id } } },
+                  where: {
+                    members: { some: { id: req.user.id } },
+                    isDisabled: false,
+                  },
                   orderBy: { name: "asc" },
                 }
               : false,
+          owner: owner === "true" ? true : false,
         },
         orderBy: { name: "asc" },
       });

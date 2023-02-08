@@ -4,6 +4,10 @@ import getOne from "./handlers/getOne";
 import create from "./handlers/create";
 import update from "./handlers/update";
 import delete_ from "./handlers/delete";
+import addUser from "./handlers/addUser";
+import removeUser from "./handlers/removeUser";
+import disable from "./handlers/disable";
+import undisable from "./handlers/undisable";
 
 const controller: CategoryHandlers = {
   getAll,
@@ -11,6 +15,10 @@ const controller: CategoryHandlers = {
   create,
   delete: delete_,
   update,
+  addUser,
+  removeUser,
+  disable,
+  undisable,
 };
 
 export default controller;

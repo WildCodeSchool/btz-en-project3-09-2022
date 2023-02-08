@@ -9,14 +9,18 @@ import getSecretKey from "../../../utils/auth";
 const signIn: IAuthController["signIn"] = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const logUser = await prisma.user.findUniqueOrThrow({
+    const logUser = await prisma.user.findUnique({
       where: {
         email: email,
       },
     });
 
+    if (!logUser) {
+      return res.status(403).json({ message: "Invalid email" });
+    }
+
     if (!(await argon2.verify(logUser.password, password))) {
-      throw new Error("Invalid password");
+      return res.status(403).json({ message: "Invalid password" });
     }
 
     const secret = getSecretKey();

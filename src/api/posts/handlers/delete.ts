@@ -4,6 +4,11 @@ import prisma from "../../../../prisma/client";
 const deletePost: IPostHandler["delete"] = async (req, res) => {
   const { id } = req.params;
   try {
+    if (!req.user || req.user.role !== "SUPER_ADMIN") {
+      return res
+        .status(403)
+        .json({ message: "Forbidden, you don't have the right access" });
+    }
     const postDeleted = await prisma.post.delete({
       where: { id },
     });
